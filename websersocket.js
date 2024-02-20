@@ -30,7 +30,23 @@ class O_msg {
     }
 }
 
+let f_s_escaped_for_string_literal = function(s){
+    // return s.replace(/[\`\$\{\}]/g, s_match => {
+    //     // Escape backticks, dollar signs, and curly braces
+    //     if (s_match === '`') return '\\`';
+    //     if (s_match === '$') return '\\$';
+    //     if (s_match === '{') return '\\{';
+    //     if (s_match === '}') return '\\}';
+    // });
+    // s = s.replace(/\$\{/g, '\\${');
+    // return s.replace(/`/g, '\\`');
+      // Escape backticks by replacing them with double backslashes followed by a backtick
+    let s_escaped = s.replace(/`/g, '\\`');
+    // Escape instances of `${` with a backslash followed by `${`
+    s_escaped = s_escaped.replace(/\$\{/g, '\\${');
+    return s_escaped;
 
+}
 let f_handler = async function(o_request){
     // important if the connection is secure (https),
     // the socket has to be opened with the wss:// protocol
@@ -72,7 +88,7 @@ let f_handler = async function(o_request){
                                 o_state.a_o_msg.push(
                                     {
                                         s_uuidv4: '${o_ws_client.s_uuidv4}',
-                                        s_msg: \`${o_data.s_msg}\`, 
+                                        s_msg: \`${f_s_escaped_for_string_literal(o_data.s_msg)}\`, 
                                         n_ts_ms: ${new Date().getTime()}
                                     }
                                 )
