@@ -31,20 +31,20 @@ class O_msg {
 }
 
 let f_s_escaped_for_string_literal = function(s){
-    // return s.replace(/[\`\$\{\}]/g, s_match => {
-    //     // Escape backticks, dollar signs, and curly braces
-    //     if (s_match === '`') return '\\`';
-    //     if (s_match === '$') return '\\$';
-    //     if (s_match === '{') return '\\{';
-    //     if (s_match === '}') return '\\}';
-    // });
+    return s.replace(/[\`\$\{\}]/g, s_match => {
+        // Escape backticks, dollar signs, and curly braces
+        if (s_match === '`') return '\\`';
+        if (s_match === '$') return '\\$';
+        if (s_match === '{') return '\\{';
+        if (s_match === '}') return '\\}';
+    });
     // s = s.replace(/\$\{/g, '\\${');
     // return s.replace(/`/g, '\\`');
       // Escape backticks by replacing them with double backslashes followed by a backtick
-    let s_escaped = s.replace(/`/g, '\\`');
-    // Escape instances of `${` with a backslash followed by `${`
-    s_escaped = s_escaped.replace(/\$\{/g, '\\${');
-    return s_escaped;
+    // let s_escaped = s.replace(/`/g, '\\`');
+    // // Escape instances of `${` with a backslash followed by `${`
+    // s_escaped = s_escaped.replace(/\$\{/g, '\\${');
+    // return s_escaped;
 
 }
 let f_handler = async function(o_request){
